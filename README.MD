@@ -100,7 +100,7 @@
 - `matchup_id` (Primary Key)
 - `title` (matchup name)
 - `description` (matchup description)
-- `max_bet` (Maximum stake limit) !!!
+- `max_bet` (Maximum stake limit)
 - `category` (matchup category)
 - `status` (Open/Closed)
 
