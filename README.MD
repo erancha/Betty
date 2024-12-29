@@ -1,46 +1,44 @@
-
-
 <!-- toc -->
 
 - [Betty](#betty)
-  * [Requirements](#requirements)
-    + [User Roles](#user-roles)
-    + [Key Features](#key-features)
-    + [User Interface (UI/UX)](#user-interface-uiux)
-    + [Security](#security)
-  * [Database Requirements](#database-requirements)
-    + [Table Structure](#table-structure)
+  - [Requirements](#requirements)
+    - [User Roles](#user-roles)
+    - [Key Features](#key-features)
+    - [User Interface (UI/UX)](#user-interface-uiux)
+    - [Security](#security)
+  - [Database Requirements](#database-requirements)
+    - [Table Structure](#table-structure)
       - [a) Users](#a-users)
       - [b) Matchups and Bets](#b-matchups-and-bets)
       - [c) Stakes](#c-stakes)
-    + [Relationships](#relationships)
-    + [Additional Requirements](#additional-requirements)
+    - [Relationships](#relationships)
+    - [Additional Requirements](#additional-requirements)
 - [Solution](#solution)
-  * [1. Overview](#1-overview)
-  * [2. Architecture Components](#2-architecture-components)
-    + [2.1 Backend](#21-backend)
-    + [2.2 Frontend](#22-frontend)
+  - [1. Overview](#1-overview)
+  - [2. Architecture Components](#2-architecture-components)
+    - [2.1 Backend](#21-backend)
+    - [2.2 Frontend](#22-frontend)
       - [State Management](#state-management)
       - [Dependencies](#dependencies)
-  * [3. Security Considerations](#3-security-considerations)
-  * [4. Deployment](#4-deployment)
-  * [5. Scalability & Performance](#5-scalability--performance)
-  * [6. Monitoring & Logging](#6-monitoring--logging)
-  * [7. Cost Optimization](#7-cost-optimization)
-  * [Appendix: Considerations for Choosing Between SQL and NoSQL for Betting Application](#appendix-considerations-for-choosing-between-sql-and-nosql-for-betting-application)
-    + [Context](#context)
-    + [Data Structure Discussion](#data-structure-discussion)
+  - [3. Security Considerations](#3-security-considerations)
+  - [4. Deployment](#4-deployment)
+  - [5. Scalability & Performance](#5-scalability--performance)
+  - [6. Monitoring & Logging](#6-monitoring--logging)
+  - [7. Cost Optimization](#7-cost-optimization)
+  - [Appendix: Considerations for Choosing Between SQL and NoSQL for Betting Application](#appendix-considerations-for-choosing-between-sql-and-nosql-for-betting-application)
+    - [Context](#context)
+    - [Data Structure Discussion](#data-structure-discussion)
       - [Initial Proposal](#initial-proposal)
       - [Normalization vs. Denormalization](#normalization-vs-denormalization)
-        * [Normalization](#normalization)
-        * [Denormalization](#denormalization)
-    + [Recommendation](#recommendation)
-    + [SQL vs. NoSQL Considerations](#sql-vs-nosql-considerations)
+        - [Normalization](#normalization)
+        - [Denormalization](#denormalization)
+    - [Recommendation](#recommendation)
+    - [SQL vs. NoSQL Considerations](#sql-vs-nosql-considerations)
       - [Using DynamoDB](#using-dynamodb)
       - [Conclusion](#conclusion)
-    + [Decision](#decision)
+    - [Decision](#decision)
       - [Example Calculation](#example-calculation)
-    + [Next Steps](#next-steps)
+    - [Next Steps](#next-steps)
 
 <!-- tocstop -->
 
@@ -257,16 +255,16 @@ The requirements are to quickly develop a Minimum Viable Product (MVP) with the 
 
 ### Decision
 
-To maintain simplicity and facilitate rapid development, the current matchups table will remain, enhanced by adding an array of bets. Each wager will detail options like:
+To maintain simplicity and facilitate rapid development, the current matchups table will remain, enhanced by adding an array of bets. Each bet will detail options like:
 
-- Wager description (e.g., "Home team under 4 points")
-- Potential payout per 100 (e.g., "120" for a wager with a payout of 120:100)
+- Bet description (e.g., "Home team under 4 points")
+- Potential payout per 100 (e.g., "120" for a bet with a payout of 120:100)
 
 This structure will allow for flexibility in managing betting options while keeping the data model straightforward.
 
 #### Example Calculation
 
-If a user inserts a stake of $1,000 for a wager with odds of 120:100, the potential payout would be calculated as follows:
+If a user inserts a stake of $1,000 for a bet with odds of 120:100, the potential payout would be calculated as follows:
 
 - Winnings: ($1,000 × 120) / 100 = $1,200
 - Total Payout: $1,000 (stake) + $1,200 (winnings) = $2,200
