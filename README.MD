@@ -1,7 +1,7 @@
 # Preface
 
 Betty is an MVP level serverless betting application built with AWS, React, and WebSockets.  
-The application is available online at https://d1m0id10877d91.cloudfront.net/
+The application is available online at https://dkw6xqmc37czd.cloudfront.net/
 
 # Table Of Content
 
@@ -29,7 +29,8 @@ The application is available online at https://d1m0id10877d91.cloudfront.net/
       - [Dependencies](#dependencies)
   - [3. Security Considerations](#3-security-considerations)
   - [4. Deployment](#4-deployment)
-  - [5. Scalability & Performance](#5-scalability--performance)
+  - [5. Scalability, Performance and Resiliency](#5-scalability-performance-and-resiliency)
+    - [Eventual consistency](#eventual-consistency)
   - [6. Monitoring & Logging](#6-monitoring--logging)
   - [7. Cost Optimization](#7-cost-optimization)
   - [Appendix: Considerations for Choosing Between SQL and NoSQL for Betting Application](#appendix-considerations-for-choosing-between-sql-and-nosql-for-betting-application)
@@ -179,7 +180,7 @@ The application is available online: [Deployment](#4-deployment)
 - Uses AWS SAM (Serverless Application Model) for deployment
 - Infrastructure is defined with CloudFormation templates
 - Deploy with a single command: `sam build` and `sam deploy`
-- The application is available online at https://d1m0id10877d91.cloudfront.net/
+- The application is available online at https://dkw6xqmc37czd.cloudfront.net/
 
 ## 5. Scalability, Performance and Resiliency
 
