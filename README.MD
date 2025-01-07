@@ -1,3 +1,10 @@
+# Preface
+
+Betty is an MVP level serverless betting application built with AWS, React, and WebSockets.  
+The application is available online at https://d1m0id10877d91.cloudfront.net/
+
+# Table Of Content
+
 <!-- toc -->
 
 - [Betty](#betty)
@@ -15,7 +22,7 @@
     - [Additional Requirements](#additional-requirements)
 - [Solution](#solution)
   - [1. Overview](#1-overview)
-  - [2. Architecture Components](#2-architecture-components)
+  - [2. Architecture](#2-architecture)
     - [2.1 Backend](#21-backend)
     - [2.2 Frontend](#22-frontend)
       - [State Management](#state-management)
@@ -92,25 +99,25 @@
 
 #### a) Users
 
-- `user_id` (Primary Key)
+- `userId` (Primary Key)
 - `balance` (Available funds)
 
 #### b) Matchups and Bets
 
-- `matchup_id` (Primary Key)
+- `matchupId` (Primary Key)
 - `title` (matchup name)
 - `description` (matchup description)
-- `max_bet` (Maximum stake limit)
+- `maxBet` (Maximum stake limit)
 - `category` (matchup category)
 - `status` (Open/Closed)
 
 #### c) Stakes
 
-- `matchup_id` (Foreign Key)
-- `user_id` (Foreign Key)
+- `matchupId` (Foreign Key)
+- `userId` (Foreign Key)
 - `amount` (Stake amount)
 - `status` (Won/Lost)
-- `created_at`
+- `createdAt`
 
 ### Relationships
 
@@ -126,12 +133,12 @@
 
 ## 1. Overview
 
-Betty is a serverless betting application built with AWS, React, and WebSockets.  
-The application is available online at https://d1m0id10877d91.cloudfront.net/
+Betty is an MVP level serverless betting application built with AWS, React, and WebSockets.  
+The application is available online: [Deployment](#4-deployment)
 
-## 2. Architecture Components
+## 2. Architecture
 
-![Architecture diagram](https://lucid.app/publicSegments/view/d031250d-0a68-4ff3-8b7d-29bfc376e14c/image.jpeg)
+![Architecture diagram](https://lucid.app/publicSegments/view/c66c78d7-f88b-42bf-96a6-c94a4cb526b8/image.jpeg)
 
 ### 2.1 Backend
 
@@ -140,7 +147,7 @@ The application is available online at https://d1m0id10877d91.cloudfront.net/
 - **AWS Cognito** for API authentication
 - **AWS Elasticache Redis** to manage active user connection IDs and cache matchups
 - **AWS DynamoDB** for storage
-- **AWS SQS** for network isolation between Lambda functions
+- **AWS SQS** for decoupling and network isolation between Lambda functions
 
 ### 2.2 Frontend
 
@@ -164,7 +171,7 @@ The application is available online at https://d1m0id10877d91.cloudfront.net/
 
 - Data in transit is encrypted with **HTTPS**
 - User authentication via AWS Cognito with **Google** integration
-- Lambda functions and Elasticache are in a **private subnet**
+- Lambda functions and Elasticache Redis are in a **private subnet**
 - IAM roles follow the least privilege principle
 
 ## 4. Deployment
@@ -174,10 +181,17 @@ The application is available online at https://d1m0id10877d91.cloudfront.net/
 - Deploy with a single command: `sam build` and `sam deploy`
 - The application is available online at https://d1m0id10877d91.cloudfront.net/
 
-## 5. Scalability & Performance
+## 5. Scalability, Performance and Resiliency
 
 - Serverless architecture enables automatic scaling
+- Elasticache Redis enhances the scalability of read operations
 - CloudFront provides low-latency content delivery
+
+### Eventual consistency
+
+In this architecture, the user balance is updated in the Users table through a DynamoDB stream processor (a Lambda function) that processes updates from the Matchups table. The balance is only updated after the matchup update has been persisted. This approach can introduce a delay in balance updates, meaning users may not see their updated balance instantly. However, this delay is often acceptable in scenarios where immediate consistency is not critical, enabling more resilient systems.
+
+Additionally, this design can improve scalability because the streams processor can handle a large volume of events asynchronously. This allows the primary application (the Generic Websocket Receiver —refer to the [Architecture diagram](#2-architecture)) to remain responsive and effectively manage incoming requests without being blocked by the balance update operations. Overall, this architecture separates concerns and facilitates more efficient resource utilization.
 
 ## 6. Monitoring & Logging
 
@@ -255,16 +269,16 @@ The requirements are to quickly develop a Minimum Viable Product (MVP) with the 
 
 ### Decision
 
-To maintain simplicity and facilitate rapid development, the current matchups table will remain, enhanced by adding an array of bets. Each bet will detail options like:
+To maintain simplicity and facilitate rapid development, the current matchups table will remain, enhanced by adding an array of bets. Each wager will detail options like:
 
-- Bet description (e.g., "Home team under 4 points")
-- Potential payout per 100 (e.g., "120" for a bet with a payout of 120:100)
+- Wager description (e.g., "Home team under 4 points")
+- Potential payout per 100 (e.g., "120" for a wager with a payout of 120:100)
 
 This structure will allow for flexibility in managing betting options while keeping the data model straightforward.
 
 #### Example Calculation
 
-If a user inserts a stake of $1,000 for a bet with odds of 120:100, the potential payout would be calculated as follows:
+If a user inserts a stake of $1,000 for a wager with odds of 120:100, the potential payout would be calculated as follows:
 
 - Winnings: ($1,000 × 120) / 100 = $1,200
 - Total Payout: $1,000 (stake) + $1,200 (winnings) = $2,200
