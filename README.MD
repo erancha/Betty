@@ -25,7 +25,6 @@ The application is available online at https://dkw6xqmc37czd.cloudfront.net/
     + [2. Architecture](#2-architecture)
       - [2.1 Backend](#21-backend)
       - [2.2 Frontend](#22-frontend)
-        * [State Management](#state-management)
     + [3. Security Considerations](#3-security-considerations)
     + [4. Deployment](#4-deployment)
     + [5. Scalability, Performance and Resiliency](#5-scalability-performance-and-resiliency)
@@ -154,12 +153,7 @@ The application is available online: [Deployment](#4-deployment)
 - Single Page Application (SPA) built with **React**
 - Hosted on **AWS S3**
 - Accessed through **AWS CloudFront** for global delivery
-- **Stack**: React, Redux, TypeScript.
-
-##### State Management
-
-- Uses Redux and Redux Thunk
-- Components connect to Redux using `connect` HOC (Higher-Order Component)
+- **Stack**: React, Redux (HOC), TypeScript.
 
 ### 3. Security Considerations
 
