@@ -8,45 +8,44 @@ The application is available online at https://dkw6xqmc37czd.cloudfront.net/
 <!-- toc -->
 
 - [Betty](#betty)
-  - [Requirements](#requirements)
-    - [User Roles](#user-roles)
-    - [Key Features](#key-features)
-    - [User Interface (UI/UX)](#user-interface-uiux)
-    - [Security](#security)
-  - [Database Requirements](#database-requirements)
-    - [Table Structure](#table-structure)
-      - [a) Users](#a-users)
-      - [b) Matchups and Bets](#b-matchups-and-bets)
-      - [c) Stakes](#c-stakes)
-    - [Relationships](#relationships)
-    - [Additional Requirements](#additional-requirements)
-- [Solution](#solution)
-  - [1. Overview](#1-overview)
-  - [2. Architecture](#2-architecture)
-    - [2.1 Backend](#21-backend)
-    - [2.2 Frontend](#22-frontend)
-      - [State Management](#state-management)
-      - [Dependencies](#dependencies)
-  - [3. Security Considerations](#3-security-considerations)
-  - [4. Deployment](#4-deployment)
-  - [5. Scalability, Performance and Resiliency](#5-scalability-performance-and-resiliency)
-    - [Eventual consistency](#eventual-consistency)
-  - [6. Monitoring & Logging](#6-monitoring--logging)
-  - [7. Cost Optimization](#7-cost-optimization)
-  - [Appendix: Considerations for Choosing Between SQL and NoSQL for Betting Application](#appendix-considerations-for-choosing-between-sql-and-nosql-for-betting-application)
-    - [Context](#context)
-    - [Data Structure Discussion](#data-structure-discussion)
-      - [Initial Proposal](#initial-proposal)
-      - [Normalization vs. Denormalization](#normalization-vs-denormalization)
-        - [Normalization](#normalization)
-        - [Denormalization](#denormalization)
-    - [Recommendation](#recommendation)
-    - [SQL vs. NoSQL Considerations](#sql-vs-nosql-considerations)
-      - [Using DynamoDB](#using-dynamodb)
-      - [Conclusion](#conclusion)
-    - [Decision](#decision)
-      - [Example Calculation](#example-calculation)
-    - [Next Steps](#next-steps)
+  * [Requirements](#requirements)
+    + [User Roles](#user-roles)
+    + [Key Features](#key-features)
+    + [User Interface (UI/UX)](#user-interface-uiux)
+    + [Security](#security)
+    + [Database](#database)
+      - [Tables Schema](#tables-schema)
+        * [a) Users](#a-users)
+        * [b) Matchups and Bets](#b-matchups-and-bets)
+        * [c) Stakes](#c-stakes)
+      - [Relationships](#relationships)
+      - [Additional Requirements](#additional-requirements)
+  * [Solution](#solution)
+    + [1. Overview](#1-overview)
+    + [2. Architecture](#2-architecture)
+      - [2.1 Backend](#21-backend)
+      - [2.2 Frontend](#22-frontend)
+        * [State Management](#state-management)
+    + [3. Security Considerations](#3-security-considerations)
+    + [4. Deployment](#4-deployment)
+    + [5. Scalability, Performance and Resiliency](#5-scalability-performance-and-resiliency)
+      - [Eventual consistency](#eventual-consistency)
+    + [6. Monitoring & Logging](#6-monitoring--logging)
+    + [7. Cost Optimization](#7-cost-optimization)
+    + [Appendix: Considerations for Choosing Between SQL and NoSQL for Betting Application](#appendix-considerations-for-choosing-between-sql-and-nosql-for-betting-application)
+      - [Context](#context)
+      - [Data Structure Discussion](#data-structure-discussion)
+        * [Initial Proposal](#initial-proposal)
+        * [Normalization vs. Denormalization](#normalization-vs-denormalization)
+          + [Normalization](#normalization)
+          + [Denormalization](#denormalization)
+      - [Recommendation](#recommendation)
+      - [SQL vs. NoSQL Considerations](#sql-vs-nosql-considerations)
+        * [Using DynamoDB](#using-dynamodb)
+        * [Conclusion](#conclusion)
+      - [Decision](#decision)
+        * [Example Calculation](#example-calculation)
+      - [Next Steps](#next-steps)
 
 <!-- tocstop -->
 
@@ -70,9 +69,9 @@ The application is available online at https://dkw6xqmc37czd.cloudfront.net/
 - **Placing Bets:**
   - Users input their stake (up to the defined maximum limit).
   - Validates the stake before submission.
-  - Once a bet is placed, the “BET” button is disabled to prevent duplicate bets.
+  - Once a bet is placed, the "BET" button is disabled to prevent duplicate bets.
 - **My Bets:**
-  - Displays the user’s closed and open bets.
+  - Displays the user's closed and open bets.
   - Status indicators: Open, Closed, Won.
 - **Results:**
   - Shows winnings.
@@ -94,16 +93,16 @@ The application is available online at https://dkw6xqmc37czd.cloudfront.net/
 - Input validation for stakes (e.g., within the allowed range).
 - Ensures users can place a bet only once per game.
 
-## Database Requirements
+### Database
 
-### Table Structure
+#### Tables Schema
 
-#### a) Users
+##### a) Users
 
 - `userId` (Primary Key)
 - `balance` (Available funds)
 
-#### b) Matchups and Bets
+##### b) Matchups and Bets
 
 - `matchupId` (Primary Key)
 - `title` (matchup name)
@@ -112,7 +111,7 @@ The application is available online at https://dkw6xqmc37czd.cloudfront.net/
 - `category` (matchup category)
 - `status` (Open/Closed)
 
-#### c) Stakes
+##### c) Stakes
 
 - `matchupId` (Foreign Key)
 - `userId` (Foreign Key)
@@ -120,28 +119,28 @@ The application is available online at https://dkw6xqmc37czd.cloudfront.net/
 - `status` (Won/Lost)
 - `createdAt`
 
-### Relationships
+#### Relationships
 
 - Stakes have a 1:n relationship with Users.
 - Each bet has multiple stakes, but each stake belongs to only one user.
 
-### Additional Requirements
+#### Additional Requirements
 
 - Store results and winning amounts.
 - Real-time updates for admin changes.
 
-# Solution
+## Solution
 
-## 1. Overview
+### 1. Overview
 
 Betty is an MVP level serverless betting application built with AWS, React, and WebSockets.  
 The application is available online: [Deployment](#4-deployment)
 
-## 2. Architecture
+### 2. Architecture
 
 ![Architecture diagram](https://lucid.app/publicSegments/view/48c09f9c-c982-4dfd-9837-d6b5b3817ba1/image.jpeg)
 
-### 2.1 Backend
+#### 2.1 Backend
 
 - **AWS Lambda** functions (Node.js) for serverless compute
 - **AWS API Gateway** with **WebSocket** APIs
@@ -150,69 +149,63 @@ The application is available online: [Deployment](#4-deployment)
 - **AWS DynamoDB** for storage
 - **AWS SQS** for decoupling and network isolation between Lambda functions
 
-### 2.2 Frontend
+#### 2.2 Frontend
 
 - Single Page Application (SPA) built with **React**
 - Hosted on **AWS S3**
 - Accessed through **AWS CloudFront** for global delivery
+- **Stack**: React, Redux, TypeScript.
 
-#### State Management
+##### State Management
 
 - Uses Redux and Redux Thunk
 - Components connect to Redux using `connect` HOC (Higher-Order Component)
 
-#### Dependencies
-
-- React
-- Redux
-- WebSocket API
-- TypeScript
-
-## 3. Security Considerations
+### 3. Security Considerations
 
 - Data in transit is encrypted with **HTTPS**
 - User authentication via AWS Cognito with **Google** integration
 - Lambda functions and Elasticache Redis are in a **private subnet**
 - IAM roles follow the least privilege principle
 
-## 4. Deployment
+### 4. Deployment
 
 - Uses AWS SAM (Serverless Application Model) for deployment
 - Infrastructure is defined with CloudFormation templates
 - Deploy with a single command: `sam build` and `sam deploy`
 - The application is available online at https://dkw6xqmc37czd.cloudfront.net/
 
-## 5. Scalability, Performance and Resiliency
+### 5. Scalability, Performance and Resiliency
 
 - Serverless architecture enables automatic scaling
 - Elasticache Redis enhances the scalability of read operations
 - CloudFront provides low-latency content delivery
 
-### Eventual consistency
+#### Eventual consistency
 
 In this architecture, the user balance is updated in the Users table through a DynamoDB stream processor (a Lambda function) that processes updates from the Matchups table. The balance is only updated after the matchup update has been persisted. This approach can introduce a delay in balance updates, meaning users may not see their updated balance instantly. However, this delay is often acceptable in scenarios where immediate consistency is not critical, enabling more resilient systems.
 
 Additionally, this design can improve scalability because the streams processor can handle a large volume of events asynchronously. This allows the primary application (the Generic Websocket Receiver —refer to the [Architecture diagram](#2-architecture)) to remain responsive and effectively manage incoming requests without being blocked by the balance update operations. Overall, this architecture separates concerns and facilitates more efficient resource utilization.
 
-## 6. Monitoring & Logging
+### 6. Monitoring & Logging
 
 - Monitoring and logging via AWS CloudWatch
 
-## 7. Cost Optimization
+### 7. Cost Optimization
 
 - Pay-per-use model for serverless components
 - Elasticache and VPC resources have hourly costs
 
-## Appendix: Considerations for Choosing Between SQL and NoSQL for Betting Application
+### Appendix: Considerations for Choosing Between SQL and NoSQL for Betting Application
 
-### Context
+#### Context
 
 In the development of this betting application, a crucial decision lies between using a SQL database or a NoSQL database like DynamoDB.  
 The requirements are to quickly develop a Minimum Viable Product (MVP) with the potential for rapid user growth and limited need for complex queries.
 
-### Data Structure Discussion
+#### Data Structure Discussion
 
-#### Initial Proposal
+##### Initial Proposal
 
 1. **Single Matchups Table**:
    - Initially, the application will have a flat `matchups` table to capture all necessary information: matchups as well as bets.
@@ -221,9 +214,9 @@ The requirements are to quickly develop a Minimum Viable Product (MVP) with the 
 2. **Future Changes**:
    - The application may introduce a `bets` table with a foreign key `matchupId` to the `matchups` table, allowing for normalization of data.
 
-#### Normalization vs. Denormalization
+##### Normalization vs. Denormalization
 
-##### Normalization
+###### Normalization
 
 - **Pros**:
   - Reduced data redundancy.
@@ -232,7 +225,7 @@ The requirements are to quickly develop a Minimum Viable Product (MVP) with the 
   - Increased complexity in querying.
   - Potential increased read costs.
 
-##### Denormalization
+###### Denormalization
 
 - **Pros**:
   - Simplicity in querying.
@@ -241,14 +234,14 @@ The requirements are to quickly develop a Minimum Viable Product (MVP) with the 
   - Data redundancy.
   - Risks of consistency issues.
 
-### Recommendation
+#### Recommendation
 
 - Adopt a denormalized structure in the initial stages to simplify querying.
 - Implement processes for maintaining data consistency during updates.
 
-### SQL vs. NoSQL Considerations
+#### SQL vs. NoSQL Considerations
 
-#### Using DynamoDB
+##### Using DynamoDB
 
 1. **Schema Flexibility**:
    - DynamoDB allows for rapid iterations without a predefined schema.
@@ -259,7 +252,7 @@ The requirements are to quickly develop a Minimum Viable Product (MVP) with the 
 4. **Data Consistency**:
    - Offers eventual consistency, which may not be suitable for critical betting operations.
 
-#### Conclusion
+##### Conclusion
 
 - **DynamoDB Suitability**:
   - Pros: Rapid development, high scalability for simple MVP.
@@ -268,7 +261,7 @@ The requirements are to quickly develop a Minimum Viable Product (MVP) with the 
   - If aiming for rapid MVP development without complex queries, DynamoDB is a suitable choice.
   - However, if complex relationships and queries are anticipated, considering a SQL database may be beneficial for long-term development.
 
-### Decision
+#### Decision
 
 To maintain simplicity and facilitate rapid development, the current matchups table will remain, enhanced by adding an array of bets. Each wager will detail options like:
 
@@ -277,13 +270,13 @@ To maintain simplicity and facilitate rapid development, the current matchups ta
 
 This structure will allow for flexibility in managing betting options while keeping the data model straightforward.
 
-#### Example Calculation
+##### Example Calculation
 
 If a user inserts a stake of $1,000 for a wager with odds of 120:100, the potential payout would be calculated as follows:
 
 - Winnings: ($1,000 × 120) / 100 = $1,200
 - Total Payout: $1,000 (stake) + $1,200 (winnings) = $2,200
 
-### Next Steps
+#### Next Steps
 
 Discuss these considerations with the client to evaluate the best approach for the betting application's database architecture.
