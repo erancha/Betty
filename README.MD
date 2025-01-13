@@ -153,7 +153,7 @@ The application is available online: [Deployment](#4-deployment)
 - Single Page Application (SPA) built with **React**
 - Hosted on **AWS S3**
 - Accessed through **AWS CloudFront** for global delivery
-- **Stack**: React, Redux (HOC), TypeScript.
+- **Stack**: React, Redux (HOC), TypeScript
 
 ### 3. Security Considerations
 
