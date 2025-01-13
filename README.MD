@@ -139,7 +139,7 @@ The application is available online: [Deployment](#4-deployment)
 
 ## 2. Architecture
 
-![Architecture diagram](https://lucid.app/publicSegments/view/6f196a13-8498-4375-87f1-86ed2272b79f/image.jpeg)
+![Architecture diagram](https://lucid.app/publicSegments/view/48c09f9c-c982-4dfd-9837-d6b5b3817ba1/image.jpeg)
 
 ### 2.1 Backend
 
