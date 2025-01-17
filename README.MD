@@ -1,49 +1,59 @@
 # Preface
 
-Betty is an MVP level serverless betting application built with AWS, React, and WebSockets.  
-The application is available online at https://dkw6xqmc37czd.cloudfront.net/
+**Betty** is an MVP level serverless betting app that allows users to place and manage bets on various sports events.
+
+The app has two user roles: Admins who oversee matchups and betting limits, and Users who can place bets, view their history, and track winnings.
+
+Key features include categorized matchups, stake validation, bet status tracking, and instant result notifications.
+
+The app is designed for scalability, using serverless computing and storage, and a pay-per-use model for cost optimization, with global content delivery via CloudFront.
+
+The app offers an intuitive, mobile-first UI/UX, and robust monitoring through AWS CloudWatch, built with AWS services, React, and WebSockets for real-time updates.
+
+The app provides secure authentication through Google.
+
+The app is available online at https://dkw6xqmc37czd.cloudfront.net/
 
 # Table Of Content
 
 <!-- toc -->
 
 - [Betty](#betty)
-  * [Requirements](#requirements)
-    + [User Roles](#user-roles)
-    + [Key Features](#key-features)
-    + [User Interface (UI/UX)](#user-interface-uiux)
-    + [Security](#security)
-    + [Database](#database)
+  - [Requirements](#requirements)
+    - [User Roles](#user-roles)
+    - [Key Features](#key-features)
+    - [UI/UX](#uiux)
+    - [Database](#database)
       - [Tables Schema](#tables-schema)
-        * [a) Users](#a-users)
-        * [b) Matchups and Bets](#b-matchups-and-bets)
-        * [c) Stakes](#c-stakes)
+        - [a) Users](#a-users)
+        - [b) Matchups and Bets](#b-matchups-and-bets)
+        - [c) Stakes](#c-stakes)
       - [Relationships](#relationships)
       - [Additional Requirements](#additional-requirements)
-  * [Solution](#solution)
-    + [1. Overview](#1-overview)
-    + [2. Architecture](#2-architecture)
+  - [Solution](#solution)
+    - [1. Overview](#1-overview)
+    - [2. Architecture](#2-architecture)
       - [2.1 Backend](#21-backend)
       - [2.2 Frontend](#22-frontend)
-    + [3. Security Considerations](#3-security-considerations)
-    + [4. Deployment](#4-deployment)
-    + [5. Scalability, Performance and Resiliency](#5-scalability-performance-and-resiliency)
+    - [3. Security Considerations](#3-security-considerations)
+    - [4. Deployment](#4-deployment)
+    - [5. Scalability, Performance and Resiliency](#5-scalability-performance-and-resiliency)
       - [Eventual consistency](#eventual-consistency)
-    + [6. Monitoring & Logging](#6-monitoring--logging)
-    + [7. Cost Optimization](#7-cost-optimization)
-    + [Appendix: Considerations for Choosing Between SQL and NoSQL for Betting Application](#appendix-considerations-for-choosing-between-sql-and-nosql-for-betting-application)
+    - [6. Monitoring & Logging](#6-monitoring--logging)
+    - [7. Cost Optimization](#7-cost-optimization)
+    - [Appendix: Considerations for Choosing Between SQL and NoSQL for Betting Application](#appendix-considerations-for-choosing-between-sql-and-nosql-for-betting-application)
       - [Context](#context)
       - [Data Structure Discussion](#data-structure-discussion)
-        * [Initial Proposal](#initial-proposal)
-        * [Normalization vs. Denormalization](#normalization-vs-denormalization)
-          + [Normalization](#normalization)
-          + [Denormalization](#denormalization)
+        - [Initial Proposal](#initial-proposal)
+        - [Normalization vs. Denormalization](#normalization-vs-denormalization)
+          - [Normalization](#normalization)
+          - [Denormalization](#denormalization)
       - [Recommendation](#recommendation)
       - [SQL vs. NoSQL Considerations](#sql-vs-nosql-considerations)
-        * [Using DynamoDB](#using-dynamodb)
-        * [Conclusion](#conclusion)
+        - [Using DynamoDB](#using-dynamodb)
+        - [Conclusion](#conclusion)
       - [Decision](#decision)
-        * [Example Calculation](#example-calculation)
+        - [Example Calculation](#example-calculation)
       - [Next Steps](#next-steps)
 
 <!-- tocstop -->
@@ -77,7 +87,7 @@ The application is available online at https://dkw6xqmc37czd.cloudfront.net/
 - **Dynamic Updates:**
   - Changes made in the admin dashboard (e.g., descriptions, limits, ..) are instantly reflected in the app.
 
-### User Interface (UI/UX)
+### UI/UX
 
 - **Responsive Design:**
   - Optimized for mobile devices.
@@ -86,11 +96,9 @@ The application is available online at https://dkw6xqmc37czd.cloudfront.net/
 - **Feedback System:**
   - Confirmation upon successful bet placement.
   - Notifications for winnings.
-
-### Security
-
-- Input validation for stakes (e.g., within the allowed range).
-- Ensures users can place a bet only once per game.
+- **Input Validation for Stakes:**
+  - Must be within the allowed range as specified by the admin.
+  - Users can place a bet only once per matchup.
 
 ### Database
 
@@ -132,28 +140,32 @@ The application is available online at https://dkw6xqmc37czd.cloudfront.net/
 
 ### 1. Overview
 
-Betty is an MVP level serverless betting application built with AWS, React, and WebSockets.  
-The application is available online: [Deployment](#4-deployment)
+Betty is a serverless MVP-level betting application utilizing AWS, React, and WebSockets, designed for dynamic and real-time user experience. The architecture comprises a Node.js backend with AWS Lambda for serverless computing, API Gateway for WebSocket APIs, and DynamoDB for data storage, ensuring scalability and performance. The frontend is a responsive React SPA hosted on AWS S3 and delivered via CloudFront. Key features include user roles for admins and users, betting functionality, and real-time updates. Security is handled with HTTPS encryption and AWS Cognito for authentication. Cost efficiency is achieved with a pay-per-use model while monitoring and logging are handled by AWS CloudWatch. The decision to use DynamoDB allows rapid MVP development, although future considerations for normalization may arise as the application evolves.
+
+The app is available online: [Deployment](#4-deployment)
 
 ### 2. Architecture
 
-![Architecture diagram](https://lucid.app/publicSegments/view/48c09f9c-c982-4dfd-9837-d6b5b3817ba1/image.jpeg)
+![Architecture diagram](https://lucid.app/publicSegments/view/b3991c6e-b5a4-47ec-8c58-454b506bfac0/image.jpeg)
 
 #### 2.1 Backend
 
-- **AWS Lambda** functions (Node.js) for serverless compute
+- **AWS Lambda** (Node.js) for serverless computing
 - **AWS API Gateway** with **WebSocket** APIs
 - **AWS Cognito** for API authentication
-- **AWS Elasticache Redis** to manage active user connection IDs and cache matchups
-- **AWS DynamoDB** for storage
-- **AWS SQS** for decoupling and network isolation between Lambda functions
+- **AWS ElastiCache Redis** to manage active user connection IDs and cache matchups
+- **AWS DynamoDB** for data storage
+- **AWS SQS** for decoupling and isolating Lambda functions
+- **AWS SNS** for notifying all registered users of new matchups
+- **AWS SES** for emailing individual users about wins or losses
+- **AWS Athena** for ad-hoc analytics on stakes data stored in S3
 
 #### 2.2 Frontend
 
-- Single Page Application (SPA) built with **React**
-- Hosted on **AWS S3**
-- Accessed through **AWS CloudFront** for global delivery
-- **Stack**: React, Redux (HOC), TypeScript
+- Single Page Application (SPA) developed with React
+- Hosted on AWS S3
+- Delivered globally via **AWS CloudFront**
+- Technology stack: **React**, **Redux** (HOC), **TypeScript**
 
 ### 3. Security Considerations
 
@@ -167,7 +179,7 @@ The application is available online: [Deployment](#4-deployment)
 - Uses AWS SAM (Serverless Application Model) for deployment
 - Infrastructure is defined with CloudFormation templates
 - Deploy with a single command: `sam build` and `sam deploy`
-- The application is available online at https://dkw6xqmc37czd.cloudfront.net/
+- The app is available online at https://dkw6xqmc37czd.cloudfront.net/
 
 ### 5. Scalability, Performance and Resiliency
 
