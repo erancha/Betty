@@ -2,7 +2,7 @@
 
 **Betty** is an MVP level serverless betting app that allows users to place and manage bets on various sports events.
 
-The app has two user roles: Admins who oversee matchups, betting limits and analytics: <br>
+The app has two user roles: Admins who oversee matchups, betting limits and analytics: 
 <a href="https://bt-frontend-static.s3.eu-central-1.amazonaws.com/readme/Betty-stakes-analytics.jpg" target="_blank">
 <img src="https://bt-frontend-static.s3.eu-central-1.amazonaws.com/readme/Betty-stakes-analytics.jpg" alt="analytics" width="100" />
 </a><br>, and Users who can place bets, view their history, and track winnings.
