@@ -5,7 +5,7 @@
 The app has two user roles: Admins who oversee matchups, betting limits and analytics: 
 <a href="https://bt-frontend-static.s3.eu-central-1.amazonaws.com/readme/Betty-stakes-analytics.jpg" target="_blank">
 <img src="https://bt-frontend-static.s3.eu-central-1.amazonaws.com/readme/Betty-stakes-analytics.jpg" alt="analytics" width="100" />
-</a><br>, and Users who can place bets, view their history, and track winnings.
+</a>,<br>and Users who can place bets, view their history, and track winnings.
 
 Key features include categorized matchups, stake validation, bet status tracking, and instant result notifications.
 
