@@ -149,7 +149,7 @@ The app is available online: [Deployment](#4-deployment)
 
 ### 2. Architecture
 
-![Architecture diagram](https://lucid.app/publicSegments/view/b7930c3b-61b3-4a59-88f4-a4669e6bd6ba/image.jpeg)
+![Architecture diagram](https://lucid.app/publicSegments/view/b1a3c56b-cfcc-4a23-a955-a3f58e57671e/image.jpeg)
 
 #### 2.1 Backend
 
@@ -159,6 +159,7 @@ The app is available online: [Deployment](#4-deployment)
 - **AWS ElastiCache Redis** to manage active user connection IDs and cache matchups
 - **AWS DynamoDB** for data storage
 - **AWS SQS** for decoupling and isolating Lambda functions
+- **AWS EventBridge** for scheduling Lambda functions
 - **AWS SNS** for notifying all registered users about new matchups
 - **AWS SES** for emailing individual users about wins or losses
 - **AWS Athena** for ad-hoc analytics on stakes data stored in S3
