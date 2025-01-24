@@ -2,12 +2,12 @@
 
 **Betty** is an MVP level serverless betting app that allows users to place and manage bets on various sports events.
 
-The app has two user roles: Admins who oversee matchups, betting limits and analytics: 
+The app has two user roles: Admins who oversee matchups, betting limits and analytics, and Users who can place bets, view their history, and track winnings.
+
+Key features include categorized matchups, stake validation, bet status tracking, instant result notifications, and analytics:<br>
 <a href="https://bt-frontend-static.s3.eu-central-1.amazonaws.com/readme/Betty-stakes-analytics.jpg" target="_blank">
 <img src="https://bt-frontend-static.s3.eu-central-1.amazonaws.com/readme/Betty-stakes-analytics.jpg" alt="analytics" width="100" />
-</a>,<br>and Users who can place bets, view their history, and track winnings.
-
-Key features include categorized matchups, stake validation, bet status tracking, and instant result notifications.
+</a>
 
 The app is designed for scalability, using serverless computing and storage, and a pay-per-use model for cost optimization, with global content delivery via CloudFront.
 
@@ -149,7 +149,7 @@ The app is available online: [Deployment](#4-deployment)
 
 ### 2. Architecture
 
-![Architecture diagram](https://lucid.app/publicSegments/view/b3991c6e-b5a4-47ec-8c58-454b506bfac0/image.jpeg)
+![Architecture diagram](https://lucid.app/publicSegments/view/b7930c3b-61b3-4a59-88f4-a4669e6bd6ba/image.jpeg)
 
 #### 2.1 Backend
 
@@ -159,9 +159,10 @@ The app is available online: [Deployment](#4-deployment)
 - **AWS ElastiCache Redis** to manage active user connection IDs and cache matchups
 - **AWS DynamoDB** for data storage
 - **AWS SQS** for decoupling and isolating Lambda functions
-- **AWS SNS** for notifying all registered users of new matchups
+- **AWS SNS** for notifying all registered users about new matchups
 - **AWS SES** for emailing individual users about wins or losses
 - **AWS Athena** for ad-hoc analytics on stakes data stored in S3
+- **AWS Step Function** for an alternative ad-hoc analytics on stakes data stored in S3
 
 #### 2.2 Frontend
 
