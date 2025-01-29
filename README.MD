@@ -155,7 +155,7 @@ The app is available online: [Deployment](#4-deployment)
 
 - **AWS Lambda** (Node.js) for serverless computing
 - **AWS API Gateway** with **WebSocket** APIs
-- **AWS Cognito** for API authentication
+- **AWS Cognito** for API authentication with **Google** integration
 - **AWS ElastiCache Redis** to manage active user connection IDs and cache matchups
 - **AWS DynamoDB** for data storage
 - **AWS SQS** for decoupling and isolating Lambda functions
