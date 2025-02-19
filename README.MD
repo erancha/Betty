@@ -149,7 +149,7 @@ The app is available online: [Deployment](#4-deployment)
 
 ### 2. Architecture
 
-![Architecture diagram](https://lucid.app/publicSegments/view/b1a3c56b-cfcc-4a23-a955-a3f58e57671e/image.jpeg)
+![Architecture diagram](https://lucid.app/publicSegments/view/67a1c63d-4132-461a-aac3-523c28150bcf/image.jpeg)
 
 #### 2.1 Backend
 
