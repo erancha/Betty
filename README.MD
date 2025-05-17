@@ -11,11 +11,11 @@ Key features include categorized matchups, stake validation, bet status tracking
 
 The app is designed for scalability, using serverless computing and storage, and a pay-per-use model for cost optimization, with global content delivery via CloudFront.
 
-The app offers an intuitive, mobile-first UI/UX, and robust monitoring through AWS CloudWatch, built with AWS services, React, and WebSockets for real-time updates.
+The app offers an intuitive, mobile-friendly UI/UX, and robust monitoring through AWS CloudWatch, built with AWS services, React, and WebSockets for real-time updates.
 
 The app provides secure authentication through Google.
 
-The app is available online at https://dkw6xqmc37czd.cloudfront.net/
+The app is available online at https://dw9tzi3cumbbz.cloudfront.net
 
 # Table Of Content
 
@@ -149,7 +149,7 @@ The app is available online: [Deployment](#4-deployment)
 
 ### 2. Architecture
 
-![Architecture diagram](https://lucid.app/publicSegments/view/67a1c63d-4132-461a-aac3-523c28150bcf/image.jpeg)
+![Architecture diagram](https://lucid.app/publicSegments/view/4aee65f3-ed02-4a7d-9764-3cfb48bef77f/image.jpeg)
 
 #### 2.1 Backend
 
@@ -184,7 +184,7 @@ The app is available online: [Deployment](#4-deployment)
 - Uses AWS SAM (Serverless Application Model) for deployment
 - Infrastructure is defined with CloudFormation templates
 - Deploy with a single command: `sam build` and `sam deploy`
-- The app is available online at https://dkw6xqmc37czd.cloudfront.net/
+- The app is available online at https://dw9tzi3cumbbz.cloudfront.net
 
 ### 5. Scalability, Performance and Resiliency
 
