@@ -4,10 +4,7 @@
 
 The app has two user roles: Admins who oversee matchups, betting limits and analytics, and Users who can place bets, view their history, and track winnings.
 
-Key features include categorized matchups, stake validation, bet status tracking, instant result notifications, and analytics:<br>
-<a href="https://bt-frontend-static.s3.eu-central-1.amazonaws.com/readme/Betty-stakes-analytics.jpg" target="_blank">
-<img src="https://bt-frontend-static.s3.eu-central-1.amazonaws.com/readme/Betty-stakes-analytics.jpg" alt="analytics" width="100" />
-</a>
+Key features include categorized matchups, stake validation, bet status tracking, instant result notifications, and analytics.
 
 The app is designed for scalability, using serverless computing and storage, and a pay-per-use model for cost optimization, with global content delivery via CloudFront.
 
@@ -15,7 +12,7 @@ The app offers an intuitive, mobile-friendly UI/UX, and robust monitoring throug
 
 The app provides secure authentication through Google.
 
-The app is available online at https://dsqkkiozdrv6g.cloudfront.net/ 
+The app is available online at https://dsqkkiozdrv6g.cloudfront.net 
 
 # Table Of Content
 
