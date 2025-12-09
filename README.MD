@@ -15,7 +15,7 @@ The app offers an intuitive, mobile-friendly UI/UX, and robust monitoring throug
 
 The app provides secure authentication through Google.
 
-The app is available online at https://dw9tzi3cumbbz.cloudfront.net
+The app is available online at https://dsqkkiozdrv6g.cloudfront.net/ 
 
 # Table Of Content
 
@@ -149,7 +149,7 @@ The app is available online: [Deployment](#4-deployment)
 
 ### 2. Architecture
 
-![Architecture diagram](https://lucid.app/publicSegments/view/4aee65f3-ed02-4a7d-9764-3cfb48bef77f/image.jpeg)
+![Architecture diagram](https://lucid.app/publicSegments/view/7d2a62ab-0ba3-4cde-ae00-aa80b3236b44/image.jpeg)
 
 #### 2.1 Backend
 
