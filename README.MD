@@ -12,7 +12,7 @@ The app offers an intuitive, mobile-friendly UI/UX, and robust monitoring throug
 
 The app provides secure authentication through Google.
 
-The app is available online at https://dsqkkiozdrv6g.cloudfront.net 
+~~The app is available online at https://dsqkkiozdrv6g.cloudfront.net~~ 
 
 # Table Of Content
 
@@ -181,7 +181,7 @@ The app is available online: [Deployment](#4-deployment)
 - Uses AWS SAM (Serverless Application Model) for deployment
 - Infrastructure is defined with CloudFormation templates
 - Deploy with a single command: `sam build` and `sam deploy`
-- The app is available online at https://dsqkkiozdrv6g.cloudfront.net
+~~- The app is available online at https://dsqkkiozdrv6g.cloudfront.net~~
 
 ### 5. Scalability, Performance and Resiliency
 
